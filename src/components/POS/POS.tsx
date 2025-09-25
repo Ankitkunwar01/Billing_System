@@ -1,4 +1,4 @@
-  import React, { useMemo, useState } from "react";
+  import React, { Key, ReactNode, useMemo, useState } from "react";
   import Card from "../common/Card";
   import Pill from "../common/Pill";
   import Input from "../common/Input";
@@ -9,19 +9,23 @@
   import { calcTotals } from "../../utils/calcTotals";
   // import "../../style/pos.css"
 
-  function POS({ onCompleteOrder }) {
+  type MenuItem = { id: string; name: string; price: number; category: string; sku: string };
+  type Line = { id: string; name: string; price: number; qty: number; sku: string };
+  interface POSProps { onCompleteOrder: (receipt: any) => void }
+
+  function POS({ onCompleteOrder }: POSProps) {
     const [query, setQuery] = useState("");
     const [category, setCategory] = useState("All");
-    const [lines, setLines] = useState([]);
+    const [lines, setLines] = useState<Line[]>([]);
     const [discount, setDiscount] = useState(0);
     const [taxRate, setTaxRate] = useState(0.13);
     const [customer, setCustomer] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("Cash");
 
-    const cats = useMemo(() => ["All", ...Array.from(new Set(MENU.map((m) => m.category)))], []);
+    const cats = useMemo<string[]>(() => ["All", ...Array.from(new Set((MENU as MenuItem[]).map((m) => m.category)))], []);
 
-    const filtered = useMemo(() => {
-      return MENU.filter(
+    const filtered = useMemo<MenuItem[]>(() => {
+      return (MENU as MenuItem[]).filter(
         (m) =>
           (category === "All" || m.category === category) &&
           (m.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -29,7 +33,7 @@
       );
     }, [query, category]);
 
-    const addLine = (m) => {
+    const addLine = (m: MenuItem) => {
       setLines((prev) => {
         const found = prev.find((l) => l.id === m.id);
         if (found) return prev.map((l) => (l.id === m.id ? { ...l, qty: l.qty + 1 } : l));
@@ -37,12 +41,12 @@
       });
     };
 
-    const changeQty = (id, d) =>
+    const changeQty = (id: string, d: number) =>
       setLines((prev) =>
         prev.map((l) => (l.id === id ? { ...l, qty: Math.max(1, l.qty + d) } : l))
       );
 
-    const removeLine = (id) => setLines((prev) => prev.filter((l) => l.id !== id));
+    const removeLine = (id: string) => setLines((prev) => prev.filter((l) => l.id !== id));
 
     const totals = calcTotals(lines, taxRate, discount);
 

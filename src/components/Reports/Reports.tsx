@@ -32,20 +32,13 @@ interface Expense {
   amount: number;
 }
 
-interface Stock {
-  id: string;
-  name: string;
-  quantity: number;
-}
-
 interface ReportsProps {
   receipts: Receipt[];
-  stock: Stock[];
   expenses: Expense[];
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
 }
 
-function Reports({ receipts, stock, expenses, setExpenses }: ReportsProps) {
+function Reports({ receipts, expenses, setExpenses }: ReportsProps) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [expForm, setExpForm] = useState({ category: "Rent", description: "", amount: 0 });

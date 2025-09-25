@@ -11,7 +11,7 @@ interface TabProps {
 const Tab: React.FC<TabProps> = ({ label, active, onClick, icon }) => (
   <button
     className="tab"
-    active={active.toString()}
+    data-active={active}
     onClick={onClick}
   >
     {icon}

@@ -13,7 +13,7 @@ function Orders({ receipts }) {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
-  const rows = receipts.map((r) => ({ ...r, status: "Completed" }));
+  const rows = receipts.map((r) => ({ ...r, status: "Pending" }));
 
   const filtered = useMemo(() => {
     return rows.filter((r) => {

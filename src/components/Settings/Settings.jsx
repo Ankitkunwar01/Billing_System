@@ -3,7 +3,7 @@ import Card from "../common/Card";
 import Input from "../common/Input";
 import Select from "../common/Select";
 
-function Settings({ defaultTax, setDefaultTax }) {
+function Settings({ defaultTax, setDefaultTax, currentUser }) {
   const [name, setName] = useState("Sunrise Cafe");
   const [addr, setAddr] = useState("123 Main St");
   const [phone, setPhone] = useState("(555) 010-1234");
@@ -21,6 +21,12 @@ function Settings({ defaultTax, setDefaultTax }) {
         <div className="grid gap-2">
           <Input label="Default Tax %" type="number" value={defaultTax} onChange={(e)=>setDefaultTax(Number(e.target.value))} />
           <div className="text-xs text-gray-600">This rate pre-fills on new orders (editable per order).</div>
+        </div>
+      </Card>
+      <Card className="col-span-12" title="Account">
+        <div className="grid grid-cols-3 gap-3">
+          <Input label="Username" value={currentUser?.username || ""} onChange={()=>{}} />
+          <Input label="Name" value={currentUser?.name || ""} onChange={()=>{}} />
         </div>
       </Card>
       <Card className="col-span-12" title="Printers & Receipts">

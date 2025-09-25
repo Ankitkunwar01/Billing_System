@@ -18,6 +18,7 @@
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.15);
   --shadow-large: 0 25px 50px rgba(0, 0, 0, 0.2);
+  
 }
 
 /* Global Reset and Base Styles */
@@ -25,6 +26,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+  
   
 }
 
@@ -34,6 +37,7 @@ body {
   background: linear-gradient(135deg, #f8fafc 0%, #f0fdfa 50%, #fef7ff 100%);
   background-attachment: fixed;
   background-size: 400% 400%;
+
   color: #111827;
   min-height: 100vh;
   animation: gradientShift 15s ease infinite;
@@ -231,25 +235,25 @@ label span {
   border: 1px solid transparent;
 }
 
-.badge[tone="green"] {
+.badge[data-tone="green"] {
   background: var(--success-gradient);
   color: white;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
-.badge[tone="red"] {
+.badge[data-tone="red"] {
   background: var(--danger-gradient);
   color: white;
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
-.badge[tone="blue"] {
+.badge[data-tone="blue"] {
   background: var(--primary-gradient);
   color: white;
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
-.badge[tone="gray"] {
+.badge[data-tone="gray"] {
   background: linear-gradient(135deg, #9ca3af, #6b7280);
   color: white;
   box-shadow: 0 2px 8px rgba(156, 163, 175, 0.3);
@@ -401,14 +405,14 @@ tr:last-child td {
   backdrop-filter: blur(10px);
 }
 
-.tab[active="true"] {
+.tab[data-active="true"] {
   background: var(--primary-gradient);
   color: white;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
   transform: translateY(-1px);
 }
 
-.tab[active="false"] {
+.tab[data-active="false"] {
   background: rgba(255, 255, 255, 0.8);
   color: #374151;
   border-color: #e5e7eb;
